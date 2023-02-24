@@ -15,7 +15,7 @@ namespace MP_API.Controllers
         {
             _context = context;
         }
-        [HttpGet("GetCourse")]
+        [HttpGet("GetExpectantCourses")]
         public ActionResult<List<Course>> GetExpectantCourses()
         {
             List<ReturnCourse> ReturnCourse = new();
@@ -35,7 +35,48 @@ namespace MP_API.Controllers
             }
             return Ok(courses);
         }
-        
-        
+
+        [HttpPost("{CourseId}/{StudentId}")]
+        public ActionResult AddStudentToCourse(int StudentId, int CourseId)
+        {
+            Course? course = _context.Courses.FirstOrDefault(c => c.CourseId == CourseId);
+            Student? student = _context.Students.FirstOrDefault(s => s.UserId == StudentId);
+            if(student != null && course != null)
+            {
+                if(student.CourseId != null)
+                {
+                    return BadRequest();
+                }
+                student.CourseId = course.CourseId;
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete("{StudentId}")]
+        public ActionResult RemoveStudentFromCourse(int StudentId)
+        {
+            Student? student = _context.Students.FirstOrDefault(s => s.UserId == StudentId);
+            if (student != null)
+            {
+                if (student.CourseId == null)
+                {
+                    return BadRequest();
+                }
+                student.CourseId = null;
+                _context.SaveChanges();
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+
     }
 }

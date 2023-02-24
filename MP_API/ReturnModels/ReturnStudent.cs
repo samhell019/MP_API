@@ -7,7 +7,7 @@ namespace MP_API.ReturnModels
     public class ReturnStudent
     {
         public Type CourseType { get; set; }
-        public int CourseId { get; set; }
+        public int? CourseId { get; set; }
         public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

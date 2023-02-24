@@ -16,8 +16,8 @@ namespace MP_API.Controllers
         }
 
         // GET: api/Instructors
-        [HttpGet("GetInstructors")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetInstructors()
+        [HttpGet]
+        public ActionResult<IEnumerable<Student>> GetInstructors()
         {
             List<ReturnInstructor> ReturnInstructors = new();
             var Instructors = _context.Instructors.ToList();

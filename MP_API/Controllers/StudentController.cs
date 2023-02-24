@@ -19,8 +19,8 @@ namespace MP_API.Controllers
 
 
         // GET: api/Students
-        [HttpGet("GetStudents")]
-        public async Task<ActionResult<IEnumerable<Student>>> GetStudents()
+        [HttpGet]
+        public ActionResult<IEnumerable<Student>> GetStudents()
         {
             List<ReturnStudent> ReturnStudents = new();
             var Students = _context.Students.ToList();
@@ -39,7 +39,5 @@ namespace MP_API.Controllers
             }
             return Ok(ReturnStudents);
         }
-
-        
     }
 }
