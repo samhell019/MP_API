@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MPAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230211183404_01init")]
-    partial class _01init
+    [Migration("20230225191236_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -124,7 +124,7 @@ namespace MPAPI.Migrations
                 {
                     b.HasBaseType("MP_API.Models.User");
 
-                    b.Property<int>("CourseId")
+                    b.Property<int?>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseType")
@@ -170,8 +170,7 @@ namespace MPAPI.Migrations
                     b.HasOne("MP_API.Models.Course", "StudentCourse")
                         .WithMany("Students")
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("StudentCourse");
                 });
