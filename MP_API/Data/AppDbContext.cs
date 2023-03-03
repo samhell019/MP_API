@@ -19,6 +19,9 @@ namespace MP_API.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .HasIndex(u => u.Username)
+                .IsUnique();
             //instructors relationships
             modelBuilder.Entity<Course>()
                 .HasOne(c => c.Instructor)

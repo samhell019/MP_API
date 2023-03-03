@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MPAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230225191236_init")]
+    [Migration("20230303082736_init")]
     partial class init
     {
         /// <inheritdoc />
@@ -102,9 +102,12 @@ namespace MPAPI.Migrations
 
                     b.Property<string>("Username")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("UserId");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Users");
 
